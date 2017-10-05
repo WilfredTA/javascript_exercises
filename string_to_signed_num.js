@@ -17,27 +17,23 @@ function stringToInteger(string) {
 function stringToSignedNum(string) {
   var sign;
   var newString;
-  var unsignedNum;
-  var signedNum;
+  var usedNum;
 
-  /* Extract sign from string */
-  if (string[0] === '-') {
+  /* Extract sign from string and remove from string */
+  if (string[0] === '-' || '+') {
     sign = string[0];
-    newString = string.replace('-', '');
-  } else if (string[0] === '+') {
-    newString = string.replace('+', '');
+    newString = string.replace(/[+-]/, '')
   }
 
   /* Get unsigned version of number */
-  unsignedNum = stringToInteger(newString);
+  usedNum = stringToInteger(newString);
 
   /* If sign was negative, multiply unsigned num by -1 */
   if (sign === '-') {
-    signedNum = unsignedNum * -1;
-    return signedNum;
-  } else {
-    return unsignedNum;
+    usedNum *= -1;
   }
+
+  return usedNum;
 
 }
 
