@@ -29,7 +29,7 @@ function concat(array, someValue) {
 		concatArray.push(someValue)
 	}
 
-	console.log(concatArray);
+	return concatArray;
 }
 
 var obj = { a: 2, b: 3 };
