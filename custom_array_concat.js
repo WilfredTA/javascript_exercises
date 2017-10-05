@@ -33,12 +33,12 @@ function concat(array, someValue) {
 }
 
 var obj = { a: 2, b: 3 };
-var newArray = concat([2, 3], obj);      // [2, 3, { a: 2, b: 3 }]
-obj.a = 'two';
-console.log(newArray);                  // [2, 3, { a: 'two', b: 3 }]
 
 var arr1 = [1, 2, 3];
-var arr2 = [4, 5, obj];				 // [1, 2, 3, 4, 5, { a: 'two', b: 3 }]
+var arr2 = [4, 5, obj];	
+							 // [1, 2, 3, 4, 5, { a: 'two', b: 3 }]
 var arr3 = concat(arr1, arr2);
+arr3[5]['c'] = 19;
+console.log(arr3);
 
 
