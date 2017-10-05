@@ -30,8 +30,10 @@ function signedNumToString(num) {
   if (num < 0) {
     sign = '-';
     num *= -1;
-  } else {
+  } else if (num > 0) {
     sign = '+';
+  } else {
+    sign = '';
   }
 
   stringNum = numberToString(num);
@@ -45,3 +47,5 @@ function signedNumToString(num) {
 console.log(signedNumToString(4321));
 
 console.log(signedNumToString(-4321));
+
+console.log(signedNumToString(0));
