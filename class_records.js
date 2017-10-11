@@ -33,64 +33,13 @@ var exerciseWeight = .35;
 
 function generateClassRecord(scores) {
  var finalReport = {};
- finalReport['studentGrades'] = calculateAverageGrades(scores);
+ finalReport['studentGrades'] = calculateFinalAverageGrades(scores);
  finalReport['exams'] = listExamMetrics(scores);
   return finalReport;
 };
 
-function getExamList(scores) {
-  var examsByStudent = [];
-  
-  Object.keys(scores).forEach(function(key) {
-    var exams = scores[key].scores.exams;
-    examsByStudent.push(exams);
-  });
-  
- return organizeExamsByExamNumber(examsByStudent);
-};
-
-function organizeExamsByExamNumber(listOfStudentExams) {
-  
- return listOfStudentExams[0].map(function(examGrade, index) {
-    return listOfStudentExams.map(function(singleStudentGrades) {
-      return singleStudentGrades[index];
-      
-    }); 
-  });
-};
-  
-
-function listExamMetrics(scores) {
-  var examScores = getExamList(scores);
-  var examMetrics = getExamMetrics(examScores);
-  return examMetrics;
-};
-
-function getExamMetrics(scoreSets) {
-  var min;
-  var max;
-  var average;
- return scoreSets.map(function(subset) {
-          min = getMinimum(subset);
-          max = getMaximum(subset);
-          average = calculateAverageGrade(subset);
-          return { average: average, min: min, max: max};
-      });
-};
-
-function getMinimum(array) {
-  return array.reduce(function(min, compared) {
-    return Math.min(min, compared);
-  });
-};
-
-function getMaximum(array) {
-  return array.reduce(function(max, compared) {
-    return Math.max(max, compared);
-  });
-};
-
-function calculateAverageGrades(scores) {
+// Calculate final average grades and dependent functions
+function calculateFinalAverageGrades(scores) {
   var averageGrades = [];
  Object.keys(scores).forEach(function(key) {
    var examAverage = calculateAverageGrade(scores[key].scores.exams);
@@ -133,6 +82,61 @@ function findLetterGrade(grade) {
     return '(A)';
   };
 };
+
+
+// Calculate exam grades and dependent functions
+
+function listExamMetrics(scores) {
+  var examScores = getExamList(scores);
+  var examMetrics = getExamMetrics(examScores);
+  return examMetrics;
+};
+
+function getExamList(scores) {
+  var examsByStudent = [];
+  
+  Object.keys(scores).forEach(function(key) {
+    var exams = scores[key].scores.exams;
+    examsByStudent.push(exams);
+  });
+  
+ return organizeExamsByExamNumber(examsByStudent);
+};
+
+function organizeExamsByExamNumber(listOfStudentExams) {
+  
+ return listOfStudentExams[0].map(function(examGrade, index) {
+    return listOfStudentExams.map(function(singleStudentGrades) {
+      return singleStudentGrades[index];
+      
+    }); 
+  });
+};
+  
+function getExamMetrics(scoreSets) {
+  var min;
+  var max;
+  var average;
+ return scoreSets.map(function(subset) {
+          min = getMinimum(subset);
+          max = getMaximum(subset);
+          average = calculateAverageGrade(subset);
+          return { average: average, min: min, max: max};
+      });
+};
+
+function getMinimum(array) {
+  return array.reduce(function(min, compared) {
+    return Math.min(min, compared);
+  });
+};
+
+function getMaximum(array) {
+  return array.reduce(function(max, compared) {
+    return Math.max(max, compared);
+  });
+};
+
 
 
 var studentScores = {
