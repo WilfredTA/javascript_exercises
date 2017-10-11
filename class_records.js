@@ -29,13 +29,13 @@
 
 */
 
-var examWeight = .65;
-var exerciseWeight = .35;
+var examWeight = 0.65;
+var exerciseWeight = 0.35;
 
 function generateClassRecord(scores) {
- var finalReport = {};
- finalReport['studentGrades'] = calculateFinalAverageGrades(scores);
- finalReport['exams'] = listExamMetrics(scores);
+  var finalReport = {};
+  finalReport['studentGrades'] = calculateFinalAverageGrades(scores);
+  finalReport['exams'] = listExamMetrics(scores);
   return finalReport;
 };
 
@@ -45,12 +45,12 @@ function generateClassRecord(scores) {
      using grade weights and matching grade letter */
 function calculateFinalAverageGrades(scores) {
   var averageGrades = [];
- Object.keys(scores).forEach(function(key) {
-   var examAverage = calculateAverageGrade(scores[key].scores.exams);
-   var exerciseAverage = calculateAverageGrade(scores[key].scores.exams);
-   var finalGrade = calculateFinalGrade(examAverage, exerciseAverage);
-   averageGrades.push(finalGrade);
- });
+  Object.keys(scores).forEach(function(key) {
+    var examAverage = calculateAverageGrade(scores[key].scores.exams);
+    var exerciseAverage = calculateAverageGrade(scores[key].scores.exams);
+    var finalGrade = calculateFinalGrade(examAverage, exerciseAverage);
+    averageGrades.push(finalGrade);
+  });
   
   return averageGrades;
 };
@@ -69,9 +69,7 @@ function calculateAverageGrade(gradeList) {
      letter grade. Returns a string with the final numeric and letter grade */
 function calculateFinalGrade(examAverage, exerciseAverage) {
   var grade = Math.round(examAverage * examWeight + exerciseAverage * exerciseWeight);
-  
   var letter = findLetterGrade(grade);
-  
   return String(grade) + ' ' + letter;
 };
 
@@ -122,7 +120,7 @@ function getExamList(scores) {
     examsByStudent.push(exams);
   });
   
- return organizeExamsByExamNumber(examsByStudent);
+  return organizeExamsByExamNumber(examsByStudent);
 };
 
   /* This is the function that actually reorganizes the grades according      
@@ -130,7 +128,7 @@ function getExamList(scores) {
      has a time complexity of O(N^2) */
 function organizeExamsByExamNumber(listOfStudentExams) {
   
- return listOfStudentExams[0].map(function(examGrade, index) {
+  return listOfStudentExams[0].map(function(examGrade, index) {
     return listOfStudentExams.map(function(singleStudentGrades) {
       return singleStudentGrades[index];
       
@@ -146,12 +144,12 @@ function getExamMetrics(scoreSets) {
   var min;
   var max;
   var average;
- return scoreSets.map(function(subset) {
-          min = getMinimum(subset);
-          max = getMaximum(subset);
-          average = calculateAverageGrade(subset);
-          return { average: average, min: min, max: max};
-      });
+  return scoreSets.map(function(subset) {
+    min = getMinimum(subset);
+    max = getMaximum(subset);
+    average = calculateAverageGrade(subset);
+    return { average: average, min: min, max: max};
+  });
 };
 
   /* Given an array of numbers, returns the minimum number in array */
