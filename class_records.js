@@ -39,6 +39,9 @@ function generateClassRecord(scores) {
 };
 
 // Calculate final average grades and dependent functions
+
+  /* Gets average exam, average exercise, then returns final grade
+     using grade weights and matching grade letter */
 function calculateFinalAverageGrades(scores) {
   var averageGrades = [];
  Object.keys(scores).forEach(function(key) {
@@ -51,6 +54,7 @@ function calculateFinalAverageGrades(scores) {
   return averageGrades;
 };
 
+  /* Given an array of numbers (grades) returns the average of those          numbers*/
 function calculateAverageGrade(gradeList) {
   var sum = gradeList.reduce(function(total, grade) {
     return total += grade;
@@ -59,6 +63,7 @@ function calculateAverageGrade(gradeList) {
   return sum / gradeList.length;
 };
 
+  /* Given two grades, uses grade weights to determine the final numeric      grade for the class. Also uses final numeric grade to determine          letter grade. Returns a string with the final numeric and letter          grade */
 function calculateFinalGrade(examAverage, exerciseAverage) {
   var grade = Math.round(examAverage * examWeight + exerciseAverage * exerciseWeight);
   
@@ -67,6 +72,8 @@ function calculateFinalGrade(examAverage, exerciseAverage) {
   return String(grade) + ' ' + letter;
 };
 
+
+  /* Given a number (final grade), calculates the corresponding letter        grade*/
 function findLetterGrade(grade) {
   if (grade <= 59) {
     return '(F)';
@@ -86,12 +93,16 @@ function findLetterGrade(grade) {
 
 // Calculate exam grades and dependent functions
 
+
+  /* First, extracts all exam grades from student scores object. Then,        calculates the maximum exam grade for each exam, the minimum exam        grade for each exam, and the average exam grade for each exam */
 function listExamMetrics(scores) {
   var examScores = getExamList(scores);
   var examMetrics = getExamMetrics(examScores);
   return examMetrics;
 };
 
+
+  /* First, gets a list of student exams. This is a two dimensional            array, where each sub array represents the exam grades of each            student. Each element in the sub array is a grade for a different        exam. Returns the result of re-organizing the list so that exam          grades are grouped by exam, not by student. I.e., each sub array of      the result represents all the grades for a single exam, rather than      all the grades for a single student */
 function getExamList(scores) {
   var examsByStudent = [];
   
@@ -103,6 +114,7 @@ function getExamList(scores) {
  return organizeExamsByExamNumber(examsByStudent);
 };
 
+  /* This is the function that actually reorganizes the grades according      to the above description. */
 function organizeExamsByExamNumber(listOfStudentExams) {
   
  return listOfStudentExams[0].map(function(examGrade, index) {
@@ -113,6 +125,7 @@ function organizeExamsByExamNumber(listOfStudentExams) {
   });
 };
   
+  /*  Input is the array containing sub arrays, where each sub array is a       collection of grades for a single exam. Returns an array of               objects, where each object is the minimum, maximum, and average of       the grades for each exam */
 function getExamMetrics(scoreSets) {
   var min;
   var max;
@@ -125,12 +138,13 @@ function getExamMetrics(scoreSets) {
       });
 };
 
+  /* Given an array of numbers, returns the minimum number in array */
 function getMinimum(array) {
   return array.reduce(function(min, compared) {
     return Math.min(min, compared);
   });
 };
-
+  /* Given an array of numbers, returns the maximum number in array */
 function getMaximum(array) {
   return array.reduce(function(max, compared) {
     return Math.max(max, compared);
@@ -139,6 +153,7 @@ function getMaximum(array) {
 
 
 
+  /* Data that is passed into the generateClassRecord() function */
 var studentScores = {
   student1: {
     id: 123456789,
