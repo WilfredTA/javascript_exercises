@@ -124,8 +124,7 @@ function getExamList(scores) {
 };
 
   /* This is the function that actually reorganizes the grades according      
-     to the above description. Not a scalable solution, since the function
-     has a time complexity of O(N^2) */
+     to the above description. */
 function organizeExamsByExamNumber(listOfStudentExams) {
   
   return listOfStudentExams[0].map(function(examGrade, index) {
