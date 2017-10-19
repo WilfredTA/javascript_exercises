@@ -35,7 +35,7 @@ function sum(number) {
 // Solved using math and recursion
 function summer(number) {
   if (number % 10 === 0) {
-    if ((number / 10) <= 10){
+    if ((number / 10) < 10){
       return number / 10;
     } else {
       return summer(number / 10);
