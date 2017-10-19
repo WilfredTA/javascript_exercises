@@ -45,7 +45,27 @@ function summer(number) {
   };
 };
 
+/* Explanation of recursive solution with example
 
+number = 792
+
+792 % 10 === 2, so it goes to outer else conditional
+calls summer(790) + 2
+
+790 % 10 === 0, so outer if conditional
+790 / 10 === 79 which is > 10, so inner else conditional
+calls summer(79)
+
+79 % 10 !== 0, so outer else conditional
+calls summer(70) + 9
+
+70 % 10 === 0
+70 / 10 = 7 which is < 10,
+
+so returns 7
+returns 7 + 9
+returns 7 + 9 + 2
+*/
 
 console.log(summer(23));          // 5
 console.log(summer(496));         // 19
